@@ -14,11 +14,11 @@
         </div>
         <p class="text-[10px]">{{ movie.description }}</p>
       </div>
-      eab30a
-      <div class="card-footer__rating text-[10px] flex items-center">
-        Rating: ({{ movie.rating }}/5)
-        <span @click="() => { }" class="flex">
-          <StarIcon color="#888888" width="16" height="16" v-for="i in movie.rating" :key="i" />
+      <div class="card-footer__rating text-[10px] flex items-center ">
+        <span>Rating: ({{ movie.rating }}/5)</span>
+        <span class="flex">
+          <StarIcon v-for="i in 5" :key="i" :color="i <= movie.rating ? '#eab30a' : '#888888'" width="16" height="16"
+            class="cursor-pointer" @click="setRating(i)" />
         </span>
       </div>
     </div>
@@ -26,14 +26,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import StarIcon from '../Icons/StarIcon.vue';
 
-defineProps({
+const props = defineProps({
   movie: Object
 })
 
-const rate = ref(0)
+const setRating = (val) => {
+  props.movie.rating = val
+}
 </script>
 
 <style lang="scss" scoped>
