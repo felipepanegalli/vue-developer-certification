@@ -5,7 +5,7 @@
       <StarIcon color="#eab30a" width="30" height="30" class="absolute top-1 right-1 drop-shadow-md" />
       <img :src="movie.image" :alt="movie.name" class="h-96 card-w rounded-t-md">
     </div>
-    <div class="card-footer bg-white px-2 py-4 card-w flex flex-col gap-2 h-44 justify-between rounded-b-md">
+    <div class="card-footer bg-white px-2 py-4 card-w flex flex-col gap-2 h-52 justify-between rounded-b-md">
       <div class="card-footer__info">
         <h1>{{ movie.name }}</h1>
         <div class="pb-2">
