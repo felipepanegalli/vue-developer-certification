@@ -21,7 +21,7 @@
       <Checkbox id="inTheaters" v-model="form.inTheaters" label="In Theaters?" />
     </template>
     <template #footer>
-      <Button @click="modalAdd = false">Cancel</Button>
+      <Button @click="() => { modalAdd = false; clearForm() }">Cancel</Button>
       <Button status="success" @click="handleSaveMovie">
         <Icon icon="ic:round-save" /> Save
       </Button>
