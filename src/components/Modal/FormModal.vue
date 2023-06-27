@@ -28,7 +28,7 @@ defineProps({
 }
 
 .modal{
-  background-color: rgba(5, 5, 5, 0.95);
+  background-color: rgba(18, 16, 27, 0.95);
 }
 
 hr {

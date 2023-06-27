@@ -2,7 +2,7 @@
   <div class="flex items-center cursor-pointer">
     <input :id="id" @input="(event) => $emit('update:modelValue', event.target.checked)" type="checkbox"
       :checked="modelValue" class="mr-2" />
-    <label :for="id" class="flex flex-row items-center font-bold cursor-pointer">
+    <label :for="id" class="flex flex-row items-center cursor-pointer">
       {{ label }}
     </label>
   </div>
