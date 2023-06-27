@@ -14,14 +14,26 @@
             {{ gender }}
           </span>
         </div>
-        <p class="text-[10px]">{{ movie.description }}</p>
+        <p class="text-[10px]">{{ resumeText(movie.description, 200) }}</p>
       </div>
-      <div class="card-footer__rating text-[10px] flex items-center ">
-        <span>Rating: ({{ hasRating }}/5)</span>
-        <span class="flex">
-          <StarIcon v-for="i in 5" :key="i" :color="i <= movie.rating ? '#eab30a' : '#888888'" width="16" height="16"
-            class="cursor-pointer" @click="setRating(i)" />
-        </span>
+      <div class="card-footer__rating text-[10px] flex items-center justify-between">
+        <div class="flex items-center">
+          <span>Rating: ({{ hasRating }}/5)</span>
+          <span class="flex">
+            <StarIcon v-for="i in 5" :key="i" :color="i <= movie.rating ? '#eab30a' : '#888888'" width="16" height="16"
+              class="cursor-pointer" @click="setRating(i)" />
+          </span>
+        </div>
+        <div class="flex gap-1">
+          <button class="bg-gray-300 p-2 rounded-full hover:bg-blue-500 hover:text-white" title="Edit movie"
+            @click="$emit('editMovie', movie.id)">
+            <Icon icon="material-symbols:edit-sharp" />
+          </button>
+          <button class="bg-gray-300 p-2 rounded-full hover:bg-red-500 hover:text-white" title="Delete movie"
+            @click="$emit('deleteMovie', movie.id)">
+            <Icon icon="material-symbols:delete" />
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -30,11 +42,14 @@
 <script setup>
 import { computed } from 'vue';
 import StarIcon from '../Icons/StarIcon.vue';
+import { Icon } from '@iconify/vue';
+import { resumeText } from '../../composables/helpers';
 
 const props = defineProps({
   movie: Object
 })
 
+defineEmits(['editMovie', 'deleteMovie'])
 const setRating = (val) => {
   props.movie.rating = val
 }

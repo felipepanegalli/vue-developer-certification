@@ -1,18 +1,18 @@
 <template>
   <FormModal :is-open="isOpen">
     <template #header>
-      <h1 class="text-lg">Add Movie</h1>
+      <h1 class="text-lg">Edit {{ props.movie.name }}</h1>
     </template>
     <template #default>
-      <Input id="name" label="Name" v-model="form.name" required />
-      <Textarea id="description" label="Description" v-model="form.description" />
-      <Input id="image" label="Image URL" v-model="form.image" />
-      <Select id="genres" label="Genres" v-model="form.genres" :options="genderOptions" is-multiple required />
-      <Checkbox id="inTheaters" v-model="form.inTheaters" label="In Theaters?" />
+      <Input id="name" label="Name" v-model="props.movie.name" required />
+      <Textarea id="description" label="Description" v-model="props.movie.description" />
+      <Input id="image" label="Image URL" v-model="props.movie.image" />
+      <Select id="genres" label="Genres" v-model="props.movie.genres" :options="genderOptions" is-multiple required />
+      <Checkbox id="inTheaters" v-model="props.movie.inTheaters" label="In Theaters?" />
     </template>
     <template #footer>
       <Button @click="handleClose">Cancel</Button>
-      <Button status="success" @click="handleSaveMovie">
+      <Button status="success" @click="handleUpdateMovie">
         <Icon icon="ic:round-save" /> Save
       </Button>
     </template>
@@ -20,7 +20,6 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
 import { Icon } from '@iconify/vue';
 import Input from '../../components/Form/Input.vue';
 import FormModal from '../../components/Modal/FormModal.vue';
@@ -36,8 +35,8 @@ import { pt } from 'yup-locale-pt';
 Yup.setLocale(pt);
 
 const props = defineProps({
-  localDB: Object,
-  isOpen: Boolean
+  movie: Object,
+  isOpen: Boolean,
 })
 const emit = defineEmits(['closeModal'])
 
@@ -50,16 +49,6 @@ const movieSchema = Yup.object().shape({
   inTheaters: Yup.boolean().label("in theaters").notRequired().default(false),
 })
 
-/** Movie form */
-const form = reactive({
-  name: '',
-  description: '',
-  image: '',
-  rating: 0,
-  genres: [],
-  inTheaters: false,
-})
-
 /** Some genders */
 const genderOptions = [
   { value: 'Drama', label: 'Drama' },
@@ -67,12 +56,10 @@ const genderOptions = [
   { value: 'Crime', label: 'Crime' },
 ]
 
-/** Save Movie */
-const handleSaveMovie = async () => {
+/** Update Movie */
+const handleUpdateMovie = async () => {
   try {
-    await movieSchema.validate(form);
-    form.id = props.localDB.items[props.localDB.items.length - 1].id + 1;
-    props.localDB.items.push({ ...form });
+    await movieSchema.validate(props.movie);
     emit('closeModal', false)
     Swal.fire({
       title: 'Success!',
@@ -80,7 +67,6 @@ const handleSaveMovie = async () => {
       icon: 'success',
       confirmButtonText: 'Close'
     });
-    clearForm();
   } catch (error) {
     Swal.fire({
       title: 'Error ocurred!',
@@ -95,18 +81,5 @@ const handleSaveMovie = async () => {
 /** Close Modal */
 const handleClose = () => {
   emit('closeModal', false)
-  clearForm()
 }
-
-/** Clear form field */
-const clearForm = () => {
-  form.id = 0;
-  form.name = '';
-  form.description = '';
-  form.image = '';
-  form.rating = 0;
-  form.genres = [];
-  form.inTheaters = false;
-}
-
 </script>

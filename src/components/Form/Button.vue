@@ -14,6 +14,7 @@ const props = defineProps({
 const getStatus = computed(() => {
   if (props.status === 'primary') return "bg-blue-500 text-white hover:bg-blue-700"
   if (props.status === 'success') return "bg-green-500 text-white hover:bg-green-700"
+  if (props.status === 'danger') return "bg-red-500 text-white hover:bg-red-700"
 
   return "bg-blue-500 text-white hover:bg-blue-700"
 })
