@@ -26,11 +26,11 @@
         </div>
         <div class="flex gap-1">
           <button class="bg-gray-300 p-2 rounded-full hover:bg-blue-500 hover:text-white" title="Edit movie"
-            @click="$emit('editMovie', movie.id)">
+            @click="$emit('edit', movie.id)">
             <Icon icon="material-symbols:edit-sharp" />
           </button>
           <button class="bg-gray-300 p-2 rounded-full hover:bg-red-500 hover:text-white" title="Delete movie"
-            @click="$emit('deleteMovie', movie.id)">
+            @click="$emit('remove', movie.id)">
             <Icon icon="material-symbols:delete" />
           </button>
         </div>
@@ -49,7 +49,7 @@ const props = defineProps({
   movie: Object
 })
 
-defineEmits(['editMovie', 'deleteMovie'])
+defineEmits(['edit', 'remove'])
 const setRating = (val) => {
   props.movie.rating = val
 }

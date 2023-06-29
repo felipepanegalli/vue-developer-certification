@@ -1,9 +1,9 @@
 <template>
-  <header class="h-32 py-3 flex items-end justify-between w-10/12 m-auto flex-wrap">
-    <div>
+  <header class="h-20 p-3 flex items-end justify-between w-10/12 m-auto flex-wrap bg-gray-800 mb-5">
+    <div class="flex self-center">
       <p class="text-white">Total movies: {{ localDB.items.length }} / Average Rating: {{ avgRatings }}</p>
     </div>
-    <div class="flex items-end gap-3">
+    <div class="flex items-end gap-3 self-center">
       <Button @click="() => { }">
         <Icon icon="material-symbols:playlist-remove" /> Remove ratings
       </Button>
@@ -14,9 +14,9 @@
 
   </header>
   <main class="min-h-screen w-10/12 m-auto">
-    <div class="flex flex-wrap items-center justify-between gap-5">
-      <MovieCard v-for="item in localDB.items" :key="item.id" :movie="item" @deleteMovie="handleDeleteMovie"
-        @editMovie="handleEditMovie" />
+    <div class="flex flex-wrap items-center justify-start gap-5">
+      <MovieItem v-for="item in localDB.items" :key="item.id" :movie="item" @remove="handleDeleteMovie"
+        @edit="handleEditMovie" />
     </div>
   </main>
   <MoviesCreateModal :is-open="modal.create" :localDB="localDB" @closeModal="modal.create = false" />
@@ -26,7 +26,7 @@
 <script setup>
 import { computed, reactive, ref } from 'vue';
 import { Icon } from '@iconify/vue';
-import MovieCard from './components/Cards/MovieCard.vue'
+import MovieItem from './components/Movie/MovieItem.vue'
 import db from './composables/movies.json'
 import Button from './components/Form/Button.vue';
 import MoviesCreateModal from './pages/Movies/Create.vue'
