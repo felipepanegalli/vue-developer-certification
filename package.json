@@ -7,7 +7,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "cypress:open": "cypress open",
-    "cypress:test": "cypress run --browser chrome"
+    "cypress:test": "cypress run -b chrome"
   },
   "dependencies": {
     "@iconify/vue": "^4.1.1",
