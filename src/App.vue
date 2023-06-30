@@ -19,8 +19,8 @@
         @edit="handleEditMovie" />
     </div>
   </main>
-  <MoviesCreateModal :is-open="modal.create" :localDB="localDB" @closeModal="modal.create = false" />
-  <MoviesEditModal :is-open="modal.edit" :movie="movie" @closeModal="modal.edit = false" />
+  <MoviesCreateModal :is-open="modal.create" :data="localDB" @closeModal="modal.create = false" :mode="'create'" />
+  <MoviesEditModal :is-open="modal.edit" :movie="movie" @closeModal="modal.edit = false" :mode="'edit'" />
 </template>
 
 <script setup>

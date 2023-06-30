@@ -19,7 +19,7 @@ import * as Yup from 'yup';
 import { pt } from 'yup-locale-pt';
 Yup.setLocale(pt);
 
-const props = defineProps({ modelValue: Object, isOpen: Boolean })
+const props = defineProps({ modelValue: Object, mode: String })
 
 /** Field Validation with Yup */
 const movieSchema = Yup.object().shape({
@@ -47,12 +47,16 @@ const genderOptions = [
   { value: 'Crime', label: 'Crime' },
 ]
 
-/** Save Movie */
+/** Save/update Movie */
 const handleSave = async () => {
   try {
-    await movieSchema.validate(form);
-    form.id = props.modelValue.items[props.modelValue.items.length - 1].id + 1;
-    props.modelValue.items.push({ ...form });
+    if (props.mode === 'create') {
+      await movieSchema.validate(form);
+      form.id = props.modelValue.items[props.modelValue.items.length - 1].id + 1;
+      props.modelValue.items.push({ ...form });
+    } else {
+      // await movieSchema.validate(props.movie);
+    }
     Swal.fire({
       title: 'Success!',
       text: 'Movie saved with success!',
@@ -82,7 +86,8 @@ const clearForm = () => {
   form.inTheaters = false;
 }
 
-defineExpose({clearForm, handleSave})
+defineExpose({ clearForm, handleSave })
+
 </script>
 
 <style lang="scss" scoped></style>

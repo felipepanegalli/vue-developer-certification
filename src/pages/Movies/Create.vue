@@ -4,7 +4,7 @@
       <h1 class="text-lg">Add Movie</h1>
     </template>
     <template #default>
-      <MovieForm ref="form" :modelValue="localDB" @update:modelValue="() => { }" />
+      <MovieForm ref="form" :modelValue="data" :mode="mode" />
     </template>
     <template #footer>
       <Button @click="handleClose">Cancel</Button>
@@ -22,7 +22,7 @@ import FormModal from '../../components/Modal/FormModal.vue';
 import MovieForm from '../../pages/Movies/MovieForm.vue';
 import Button from '../../components/Form/Button.vue';
 
-const props = defineProps({ localDB: Object, isOpen: Boolean })
+const props = defineProps({ data: Object, isOpen: Boolean, mode: String })
 const emit = defineEmits(['closeModal'])
 const form = ref(null);
 
