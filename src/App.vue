@@ -7,7 +7,7 @@
       <Button @click="() => { }">
         <Icon icon="material-symbols:playlist-remove" /> Remove ratings
       </Button>
-      <Button @click="modal.create = true">
+      <Button @click="modal.create = true" id="addButton">
         <Icon icon="material-symbols:add-circle-outline" /> Add movie
       </Button>
     </div>

@@ -2,7 +2,7 @@
   <div class="flex flex-col mb-4">
     <label :for="id" class="text-sm">{{ label }}</label>
     <select :multiple="isMultiple" class="mt-2 bg-transparent border border-gray-800 p-2 text-sm outline-0"
-      @change="handleChange" :value="modelValue">
+      @change="handleChange" :value="modelValue" :id="id">
       <option :value="option.value" v-for="option in options" :key="option.value" :selected="modelValue.includes(option.value)">
         {{ option.label }}
       </option>

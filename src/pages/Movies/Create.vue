@@ -12,7 +12,7 @@
     </template>
     <template #footer>
       <Button @click="handleClose">Cancel</Button>
-      <Button status="success" @click="handleSaveMovie">
+      <Button status="success" @click="handleSaveMovie" id="saveButton">
         <Icon icon="ic:round-save" /> Save
       </Button>
     </template>
