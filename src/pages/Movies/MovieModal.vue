@@ -1,7 +1,7 @@
 <template>
-  <FormModal :is-open="isOpen">
+  <FormModal :is-open="isOpen" @close="handleClose">
     <template #header>
-      <h1 class="text-lg">Add Movie</h1>
+      <h1 class="text-lg">{{title}}</h1>
     </template>
     <template #default>
       <MovieForm ref="form" :modelValue="data" :movie="movie" :mode="mode"/>
@@ -17,17 +17,22 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {defineAsyncComponent, ref} from 'vue';
 import {Icon} from '@iconify/vue';
 import FormModal from '../../components/Modal/FormModal.vue';
-import MovieForm from '../../pages/Movies/MovieForm.vue';
 import Button from '../../components/Form/Button.vue';
+
+const MovieForm = defineAsyncComponent({
+  loader: () => import('@/pages/Movies/MovieForm.vue'),
+  delay: 200,
+});
 
 defineProps({
   data: Object,
   movie: Object,
   isOpen: Boolean,
   mode: String,
+  title: String
 });
 const emit = defineEmits(['closeModal']);
 const form = ref(null);

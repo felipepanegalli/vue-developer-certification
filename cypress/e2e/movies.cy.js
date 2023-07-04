@@ -2,7 +2,9 @@ describe('Movie Flow', () => {
   it('Movie modal status', () => {
     cy.visit('http://localhost:5173/');
     cy.get('#addButton').click();
+    cy.wait(1000);
     cy.get('#cancelButton').click();
+    cy.wait(1500);
   });
 
   it('Add movie', () => {
@@ -18,6 +20,7 @@ describe('Movie Flow', () => {
     cy.wait(1500);
     cy.get('.swal2-confirm.swal2-styled').click();
     cy.scrollTo(0, 500);
+    cy.wait(1500);
   });
 
   it('Edit movie', () => {
@@ -33,5 +36,6 @@ describe('Movie Flow', () => {
     cy.wait(1500);
     cy.get('.swal2-confirm.swal2-styled').click();
     cy.scrollTo(0, 0);
+    cy.wait(1500);
   });
 });
