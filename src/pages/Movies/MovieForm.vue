@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import {reactive} from 'vue';
+import {onMounted, reactive} from 'vue';
 import Input from '../../components/Form/Input.vue';
 import Textarea from '../../components/Form/Textarea.vue';
 import Select from '../../components/Form/Select.vue';
@@ -99,6 +99,10 @@ const clearForm = () => {
   form.genres = [];
   form.inTheaters = false;
 };
+
+onMounted(() => {
+  document.getElementById('name').focus();
+});
 
 defineExpose({clearForm, handleSave});
 

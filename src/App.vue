@@ -1,9 +1,9 @@
 <script setup>
 import {computed, defineAsyncComponent, reactive, ref} from 'vue';
 import {Icon} from '@iconify/vue';
-import MovieItem from './components/Movie/MovieItem.vue';
-import db from './composables/movies.json';
-import Button from './components/Form/Button.vue';
+import MovieItem from '@/pages/Movies/MovieItem.vue';
+import db from '@/composables/movies.json';
+import Button from '@/components/Form/Button.vue';
 import Swal from 'sweetalert2';
 
 const MovieModal = defineAsyncComponent({

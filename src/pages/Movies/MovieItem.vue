@@ -19,10 +19,10 @@
       <div class="card-footer__rating text-[10px] flex items-center justify-between">
         <div class="flex items-center">
           <span>Rating: ({{ hasRating }}/5)</span>
-          <span class="flex">
+          <TransitionGroup tag="span" class="flex">
             <StarIcon v-for="i in 5" :key="i" :color="i <= movie.rating ? '#eab30a' : '#888888'" width="16" height="16"
                       class="cursor-pointer" @click="setRating(i)"/>
-          </span>
+          </TransitionGroup>
         </div>
         <div class="flex gap-1">
           <button class="bg-gray-300 p-2 rounded-full hover:bg-blue-500 hover:text-white" title="Edit movie"
@@ -41,9 +41,9 @@
 
 <script setup>
 import {computed} from 'vue';
-import StarIcon from '../Icons/StarIcon.vue';
+import StarIcon from '@/components/Icons/StarIcon.vue';
 import {Icon} from '@iconify/vue';
-import {resumeText} from '../../composables/helpers';
+import {resumeText} from '@/composables/helpers';
 
 const props = defineProps({
   movie: Object,
@@ -62,5 +62,15 @@ const hasRating = computed(() => {
 <style lang="scss" scoped>
 .card-w {
   width: 272px;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

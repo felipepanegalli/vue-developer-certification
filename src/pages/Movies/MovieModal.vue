@@ -1,19 +1,19 @@
 <template>
-  <FormModal :is-open="isOpen" @close="handleClose">
-    <template #header>
-      <h1 class="text-lg">{{title}}</h1>
-    </template>
-    <template #default>
-      <MovieForm ref="form" :modelValue="data" :movie="movie" :mode="mode"/>
-    </template>
-    <template #footer>
-      <Button id="cancelButton" @click="handleClose">Cancel</Button>
-      <Button id="saveButton" status="success" @click="handleSave">
-        <Icon icon="ic:round-save"/>
-        Save
-      </Button>
-    </template>
-  </FormModal>
+    <FormModal :is-open="isOpen" @close="handleClose">
+      <template #header>
+        <h1 class="text-lg">{{ title }}</h1>
+      </template>
+      <template #default>
+        <MovieForm ref="form" :modelValue="data" :movie="movie" :mode="mode"/>
+      </template>
+      <template #footer>
+        <Button id="cancelButton" @click="handleClose">Cancel</Button>
+        <Button id="saveButton" status="success" @click="handleSave">
+          <Icon icon="ic:round-save"/>
+          Save
+        </Button>
+      </template>
+    </FormModal>
 </template>
 
 <script setup>
@@ -32,7 +32,7 @@ defineProps({
   movie: Object,
   isOpen: Boolean,
   mode: String,
-  title: String
+  title: String,
 });
 const emit = defineEmits(['closeModal']);
 const form = ref(null);

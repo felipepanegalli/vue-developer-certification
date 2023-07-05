@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col mb-4">
     <label :for="id" class="text-sm">{{ label }}</label>
-    <select :multiple="isMultiple" class="mt-2 bg-transparent border border-gray-800 p-2 text-sm outline-0"
+    <select :multiple="isMultiple" class="mt-2 p-2 text-sm outline-0 border bg-[#121821] border-[#2F3844]"
       @change="handleChange" :value="modelValue" :id="id">
       <option :value="option.value" v-for="option in options" :key="option.value" :selected="modelValue.includes(option.value)">
         {{ option.label }}
@@ -30,6 +30,6 @@ const handleChange = (e) => {
 
 <style lang="scss" scoped>
 select[multiple]:focus option:checked {
-  background: red linear-gradient(0deg, red 0%, red 100%);
+  background: lightgray linear-gradient(0deg, lightgray 0%, lightgray 100%);
 }
 </style>

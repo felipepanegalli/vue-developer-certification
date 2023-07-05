@@ -3,7 +3,7 @@
     <label :for="id" class="text-sm">{{ label }}</label>
     <textarea :name="id" :id="id" :cols="cols" :rows="rows" @input="$emit('update:modelValue', $event.target.value)"
       :value="modelValue" :placeholder="placeholder"
-      class="mt-2 bg-transparent border border-gray-800 p-2 text-sm outline-0"></textarea>
+      class="mt-2 p-2 text-sm outline-0 border bg-[#121821] border-[#2F3844]"></textarea>
   </div>
 </template>
 
