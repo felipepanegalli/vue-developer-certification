@@ -1,3 +1,23 @@
+<script setup>
+import {computed} from 'vue';
+import StarIcon from '@/components/Icons/StarIcon.vue';
+import {Icon} from '@iconify/vue';
+import {resumeText} from '@/composables/helpers';
+
+const props = defineProps({
+  movie: Object,
+});
+
+defineEmits(['edit', 'remove']);
+const setRating = (val) => {
+  props.movie.rating = val;
+};
+
+const hasRating = computed(() => {
+  return (props.movie.rating === 0 || props.movie.rating === null) ? ' - ' : props.movie.rating;
+});
+</script>
+
 <template>
   <div class="max-w-xs">
     <div class="card-poster relative">
@@ -25,10 +45,15 @@
           </TransitionGroup>
         </div>
         <div class="flex gap-1">
-          <button class="bg-gray-300 p-2 rounded-full hover:bg-blue-500 hover:text-white" title="Edit movie"
+          <button class="bg-gray-300 p-2 rounded-full hover:bg-yellow-500 hover:text-white" title="Edit movie"
                   @click="$emit('edit', movie.id)" :id="`edit-movie-${movie.id}`">
             <Icon icon="material-symbols:edit-sharp"/>
           </button>
+          <RouterLink :to="{name:'movies-detail', params:{id: movie.id}}">
+            <button class="bg-gray-300 p-2 rounded-full hover:bg-blue-500 hover:text-white" title="view movie">
+              <Icon icon="mdi:eye"/>
+            </button>
+          </RouterLink>
           <button class="bg-gray-300 p-2 rounded-full hover:bg-red-500 hover:text-white" title="Delete movie"
                   @click="$emit('remove', movie.id)" :id="`remove-movie-${movie.id}`">
             <Icon icon="material-symbols:delete"/>
@@ -38,26 +63,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import {computed} from 'vue';
-import StarIcon from '@/components/Icons/StarIcon.vue';
-import {Icon} from '@iconify/vue';
-import {resumeText} from '@/composables/helpers';
-
-const props = defineProps({
-  movie: Object,
-});
-
-defineEmits(['edit', 'remove']);
-const setRating = (val) => {
-  props.movie.rating = val;
-};
-
-const hasRating = computed(() => {
-  return (props.movie.rating === 0 || props.movie.rating === null) ? ' - ' : props.movie.rating;
-});
-</script>
 
 <style lang="scss" scoped>
 .card-w {
